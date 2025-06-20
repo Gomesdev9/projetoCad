@@ -30,10 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ':email' => $email,
                 ':senha' => $senhaVerify
             ]);
-            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-            $_SESSION['logado'] = "logado";
-            $_SESSION['id_USER'] = $usuario['id_User'];
-            $_SESSION['mensagem'] = 'cadastro efetuado';
             header('location: ../pages/cadastro.php');
             exit;
         } catch (\Throwable $th) {

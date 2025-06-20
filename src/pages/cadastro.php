@@ -1,5 +1,6 @@
 <?php
 session_start();
+$value = $_SESSION['value'] ?? NULL; 
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@ session_start();
         <form action="../backend/autenticar.php" method="POST">
             <div class="mb-3">
                 <label for="emailLogin" class="form-label">E-mail</label>
-                <input type="email" class="form-control" name="email" id="emailLogin" placeholder="Digite seu e-mail">
+                <input type="email" class="form-control" name="email" id="emailLogin" placeholder="Digite seu e-mail" value="<?=htmlspecialchars($value);?>">
             </div>
             <div class="mb-3">
                 <label for="senhaLogin" class="form-label">Senha</label>
