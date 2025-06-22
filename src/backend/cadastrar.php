@@ -11,13 +11,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['mensagem'] = 'erro!! Preencha todos os campos!';
         header('location: ../pages/cadastro.php');
         exit;
-    } elseif ($senha === $senhaVerify) {
+    } if ($senha === $senhaVerify) {
         $senhaVerify = password_hash($senhaVerify, PASSWORD_DEFAULT);
         $sql = "SELECT email FROM usuarios WHERE email = :email";
         $stmt = $conexao->prepare($sql);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
+            $_SESSION['value'] = $email;
             $_SESSION['mensagem'] = 'Este e-mail já está cadastrado.';
             header('Location: ../pages/cadastro.php');
             exit;
@@ -30,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ':email' => $email,
                 ':senha' => $senhaVerify
             ]);
+            $_SESSION['value'] = $email;
             header('location: ../pages/cadastro.php');
             exit;
         } catch (\Throwable $th) {
